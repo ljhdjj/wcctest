@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS Postcode (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    postcode VARCHAR(10) NOT NULL,
+    latitude DOUBLE NOT NULL,
+    longitude DOUBLE NOT NULL
+);
