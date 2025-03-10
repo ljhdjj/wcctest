@@ -13,7 +13,6 @@ public class RequestLoggingAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(RequestLoggingAspect.class);
 
-    // Adjusted pointcut: log all calls to getDistance, then extract arguments
     @Before("execution(* com.example.controller.DistanceController.getDistance(..))")
     public void logDistanceRequest(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();

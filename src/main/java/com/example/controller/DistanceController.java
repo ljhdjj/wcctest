@@ -16,14 +16,11 @@ public class DistanceController {
 
     @GetMapping("/{postcode1}/{postcode2}")
     public Map<String, Object> getDistance(@PathVariable String postcode1, @PathVariable String postcode2) {
-        // Fetch postcode details (latitude, longitude)
         Postcode location1 = service.getPostcodeDetails(postcode1);
         Postcode location2 = service.getPostcodeDetails(postcode2);
 
-        // Compute distance
         double distance = service.calculateDistance(postcode1, postcode2);
 
-        // Return detailed JSON response
         return Map.of(
                 "location1", Map.of(
                         "postcode", location1.getPostcode(),

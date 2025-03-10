@@ -20,7 +20,6 @@ public class PostalCodeController {
     @Autowired
     private PostcodeRepository postcodeRepository;
 
-    // Get all postal code mappings
     @GetMapping
     public ResponseEntity<List<PostalCodeDTO>> getAllPostcodes() {
         List<PostalCodeDTO> list = postcodeRepository.findAll()
@@ -30,7 +29,6 @@ public class PostalCodeController {
         return ResponseEntity.ok(list);
     }
 
-    // Get a specific postal code mapping by postal code
     @GetMapping("/{postcode}")
     public ResponseEntity<?> getPostcode(@PathVariable String postcode) {
         Optional<Postcode> opt = postcodeRepository.findById(postcode);
@@ -42,7 +40,6 @@ public class PostalCodeController {
         }
     }
 
-    // Create a new postal code mapping
     @PostMapping
     public ResponseEntity<ApiResponse> createPostcode(@RequestBody PostalCodeDTO dto) {
         if (postcodeRepository.existsById(dto.getPostcode())) {
@@ -54,7 +51,6 @@ public class PostalCodeController {
         return ResponseEntity.ok(new ApiResponse("success", "Mapping created", convertToDTO(saved)));
     }
 
-    // Update an existing postal code mapping
     @PutMapping("/{postcode}")
     public ResponseEntity<ApiResponse> updatePostcode(@PathVariable String postcode, @RequestBody PostalCodeDTO dto) {
         Optional<Postcode> opt = postcodeRepository.findById(postcode);
@@ -70,7 +66,6 @@ public class PostalCodeController {
         }
     }
 
-    // Delete a postal code mapping
     @DeleteMapping("/{postcode}")
     public ResponseEntity<ApiResponse> deletePostcode(@PathVariable String postcode) {
         if (postcodeRepository.existsById(postcode)) {
@@ -82,7 +77,6 @@ public class PostalCodeController {
         }
     }
 
-    // Helper method to convert Postcode entity to PostalCodeDTO
     private PostalCodeDTO convertToDTO(Postcode entity) {
         return new PostalCodeDTO(entity.getPostcode(), entity.getLatitude(), entity.getLongitude());
     }

@@ -20,16 +20,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/h2-console/**").permitAll()   // ✅ Allow H2 Console
+                .requestMatchers("/h2-console/**").permitAll()
                 .anyRequest().authenticated()
             )
             .httpBasic()
             .and()
-            // Disable CSRF (not recommended for production unless you're stateless)
             .csrf(AbstractHttpConfigurer::disable)
-            // Allow H2 console to be loaded in a frame.
             .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
-            // Use stateless session management for REST APIs.
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return http.build();
@@ -37,10 +34,9 @@ public class SecurityConfig {
 
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
-        // Use withDefaultPasswordEncoder() only for development/testing purposes.
         UserDetails user = User.withDefaultPasswordEncoder()
-                .username("admin")       // Set your username.
-                .password("password")    // Set your password.
+                .username("admin")       
+                .password("password")    
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(user);

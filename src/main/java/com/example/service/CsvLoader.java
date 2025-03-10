@@ -18,7 +18,6 @@ public class CsvLoader {
     @PostConstruct
     public void loadCsvData() {
         try {
-            // Read CSV file from resources
             InputStream inputStream = getClass().getClassLoader().getResourceAsStream("ukpostcodes.csv");
             if (inputStream == null) {
                 throw new RuntimeException("CSV file not found!");
@@ -39,7 +38,7 @@ public class CsvLoader {
                 double latitude = Double.parseDouble(data[1].trim());
                 double longitude = Double.parseDouble(data[2].trim());
 
-                // Insert data into the database
+
                 jdbcTemplate.update("INSERT INTO postcode_table (postcode, latitude, longitude) VALUES (?, ?, ?)",
                         postcode, latitude, longitude);
             }

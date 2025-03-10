@@ -13,7 +13,6 @@ public class ApiResponse {
         this.data = data;
     }
 
-    // Getters and Setters
     public String getStatus() {
         return status;
     }

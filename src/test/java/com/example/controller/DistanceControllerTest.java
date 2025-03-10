@@ -20,7 +20,7 @@ public class DistanceControllerTest {
     private MockMvc mockMvc;
     
     @MockBean
-    private DistanceService distanceService;  // Use @MockBean to register it in the context
+    private DistanceService distanceService;  
 
     @Test
     void testGetDistance() throws Exception {

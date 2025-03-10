@@ -13,7 +13,6 @@ public class PostalCodeDTO {
         this.longitude = longitude;
     }
 
-    // Getters and Setters
     public String getPostcode() {
         return postcode;
     }
